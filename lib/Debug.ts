@@ -21,36 +21,39 @@ function log(e?: any) {
  * Console polyfill
  */
 ((global) => {
-    "use strict";
-    if (!global.console) {
-        global.console = {};
+    if(
+        typeof global !== "undefined"
+    ) {
+        if (!global.console) {
+            global.console = {};
+        }
+        let con = global.console;
+        let prop;
+        let method;
+        let dummy = () => {
+            return null;
+        };
+        let properties = ["memory"];
+        let methods = ("assert,clear,count,debug,dir,dirxml,error,exception,group," +
+        "groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd," +
+        "show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn").split(",");
+        do {
+            prop = properties.pop();
+            if (prop) {
+                if (!con[prop]) {
+                    con[prop] = {};
+                }
+            }
+        } while (prop);
+        do {
+            method = methods.pop();
+            if (method) {
+                if (typeof con[method] !== "function") {
+                    con[method] = dummy;
+                }
+            }
+        } while (prop);
     }
-    let con = global.console;
-    let prop;
-    let method;
-    let dummy = () => {
-        return null;
-    };
-    let properties = ["memory"];
-    let methods = ("assert,clear,count,debug,dir,dirxml,error,exception,group," +
-    "groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd," +
-    "show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn").split(",");
-    do {
-        prop = properties.pop();
-        if (prop) {
-            if (!con[prop]) {
-                con[prop] = {};
-            }
-        }
-    } while (prop);
-    do {
-        method = methods.pop();
-        if (method) {
-            if (typeof con[method] !== "function") {
-                con[method] = dummy;
-            }
-        }
-    } while (prop);
 })(typeof window === "undefined" ? this : window);
 /**
  * Push this into console methods

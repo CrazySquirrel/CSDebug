@@ -1,6 +1,6 @@
 {
   "name": "Debug",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "./lib/Debug.js",
   "description": "Class to extend the standard console.",
   "keywords": [

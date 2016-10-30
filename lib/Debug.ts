@@ -161,16 +161,20 @@ class Debug implements IDebug {
         /**
          * If body exist
          */
-        if (document && document.body) {
+        if (
+            typeof window !== "undefined" &&
+            typeof window.document !== "undefined" &&
+            typeof window.document.body !== "undefined"
+        ) {
             /**
              * Get debug console element
              */
-            that.debugConsole = document.getElementById("debug-console");
+            that.debugConsole = window.document.getElementById("debug-console");
             /**
              * If debug console element doesn't exist, than create it
              */
             if (!that.debugConsole) {
-                that.debugConsole = document.createElement("div");
+                that.debugConsole = window.document.createElement("div");
                 that.debugConsole.id = "debug-console";
                 that.debugConsole.style.width = "0px";
                 that.debugConsole.style.height = "0px";
@@ -185,7 +189,7 @@ class Debug implements IDebug {
                 /**
                  * Append debug console element on the page
                  */
-                document.body.appendChild(that.debugConsole);
+                window.document.body.appendChild(that.debugConsole);
             }
             /**
              * Set empty JSON array into debug console element

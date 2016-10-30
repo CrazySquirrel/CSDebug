@@ -7,10 +7,20 @@ import IError from "../Interfaces/IError";
 import IWindow from "../Interfaces/IWindow";
 
 declare var window: IWindow;
+declare var global: any;
 /**
  * Declare error interface
  */
 declare var Error: IError;
+
+if (typeof window === "undefined") {
+    if (typeof global !== "undefined") {
+        window = global;
+    } else {
+        window = {};
+    }
+}
+
 /**
  * Default log function
  */
@@ -21,7 +31,7 @@ function log(e?: any) {
  * Console polyfill
  */
 ((global) => {
-    if(
+    if (
         typeof global !== "undefined"
     ) {
         if (!global.console) {
@@ -114,27 +124,29 @@ class Debug implements IDebug {
          */
         this.use = localUse || false;
         this.arrLog = [];
-        /**
-         * Save default window console methods
-         */
-        this.console = {
-            debug: window.console.debug || window.console.log || log(),
-            error: window.console.error || window.console.log || log(),
-            info: window.console.info || window.console.log || log(),
-            log: window.console.log || window.console.log || log(),
-            warn: window.console.warn || window.console.log || log(),
-        };
-        /**
-         * Override window console methods
-         */
-        if (window.console) {
-            window.console.error = this._error;
-            window.console.warn = this._warn;
-            window.console.info = this._info;
-            window.console.log = this._log;
-            window.console.debug = this._debug;
-        }
 
+        if (typeof window !== "undefined") {
+            /**
+             * Save default window console methods
+             */
+            this.console = {
+                debug: window.console.debug || window.console.log || log(),
+                error: window.console.error || window.console.log || log(),
+                info: window.console.info || window.console.log || log(),
+                log: window.console.log || window.console.log || log(),
+                warn: window.console.warn || window.console.log || log(),
+            };
+            /**
+             * Override window console methods
+             */
+            if (window.console) {
+                window.console.error = this._error;
+                window.console.warn = this._warn;
+                window.console.info = this._info;
+                window.console.log = this._log;
+                window.console.debug = this._debug;
+            }
+        }
         Utils.implementationStaticMethods(this);
     }
 
@@ -431,7 +443,12 @@ class Debug implements IDebug {
                     /**
                      * Try to call default window console method or log method if it doesn't exist
                      */
-                    if (that.console) {
+                    if (
+                        typeof window !== "undefined" &&
+                        typeof window.console !== "undefined" &&
+                        typeof that !== "undefined" &&
+                        typeof that.console !== "undefined"
+                    ) {
                         if (typeof that.console[mode] === "function") {
                             that.console[mode].apply(window.console, [obj]);
                         } else if (typeof that.console.log === "function") {
@@ -475,10 +492,17 @@ class Debug implements IDebug {
                     /**
                      * Call console error method, if it is not supported call log method
                      */
-                    if (typeof that.console.error === "function") {
-                        that.console.error.apply(window.console, arguments);
-                    } else if (typeof that.console.log === "function") {
-                        that.console.log.apply(window.console, arguments);
+                    if (
+                        typeof window !== "undefined" &&
+                        typeof window.console !== "undefined" &&
+                        typeof that !== "undefined" &&
+                        typeof that.console !== "undefined"
+                    ) {
+                        if (typeof that.console.error === "function") {
+                            that.console.error.apply(window.console, arguments);
+                        } else if (typeof that.console.log === "function") {
+                            that.console.log.apply(window.console, arguments);
+                        }
                     }
                 } catch (e) {
                     log(e);
@@ -517,10 +541,17 @@ class Debug implements IDebug {
                     /**
                      * Call console warn method, if it is not supported call log method
                      */
-                    if (typeof that.console.warn === "function") {
-                        that.console.warn.apply(window.console, arguments);
-                    } else if (typeof that.console.log === "function") {
-                        that.console.log.apply(window.console, arguments);
+                    if (
+                        typeof window !== "undefined" &&
+                        typeof window.console !== "undefined" &&
+                        typeof that !== "undefined" &&
+                        typeof that.console !== "undefined"
+                    ) {
+                        if (typeof that.console.warn === "function") {
+                            that.console.warn.apply(window.console, arguments);
+                        } else if (typeof that.console.log === "function") {
+                            that.console.log.apply(window.console, arguments);
+                        }
                     }
                 } catch (e) {
                     log(e);
@@ -559,10 +590,17 @@ class Debug implements IDebug {
                     /**
                      * Call console info method, if it is not supported call log method
                      */
-                    if (typeof that.console.info === "function") {
-                        that.console.info.apply(window.console, arguments);
-                    } else if (typeof that.console.log === "function") {
-                        that.console.log.apply(window.console, arguments);
+                    if (
+                        typeof window !== "undefined" &&
+                        typeof window.console !== "undefined" &&
+                        typeof that !== "undefined" &&
+                        typeof that.console !== "undefined"
+                    ) {
+                        if (typeof that.console.info === "function") {
+                            that.console.info.apply(window.console, arguments);
+                        } else if (typeof that.console.log === "function") {
+                            that.console.log.apply(window.console, arguments);
+                        }
                     }
                 } catch (e) {
                     log(e);
@@ -601,8 +639,15 @@ class Debug implements IDebug {
                     /**
                      * Call console log method
                      */
-                    if (typeof that.console.log === "function") {
-                        that.console.log.apply(window.console, arguments);
+                    if (
+                        typeof window !== "undefined" &&
+                        typeof window.console !== "undefined" &&
+                        typeof that !== "undefined" &&
+                        typeof that.console !== "undefined"
+                    ) {
+                        if (typeof that.console.log === "function") {
+                            that.console.log.apply(window.console, arguments);
+                        }
                     }
                 } catch (e) {
                     log(e);
@@ -641,10 +686,17 @@ class Debug implements IDebug {
                     /**
                      * Call console debug method, if it is not supported call log method
                      */
-                    if (typeof that.console.debug === "function") {
-                        that.console.debug.apply(window.console, arguments);
-                    } else if (typeof that.console.log === "function") {
-                        that.console.log.apply(window.console, arguments);
+                    if (
+                        typeof window !== "undefined" &&
+                        typeof window.console !== "undefined" &&
+                        typeof that !== "undefined" &&
+                        typeof that.console !== "undefined"
+                    ) {
+                        if (typeof that.console.debug === "function") {
+                            that.console.debug.apply(window.console, arguments);
+                        } else if (typeof that.console.log === "function") {
+                            that.console.log.apply(window.console, arguments);
+                        }
                     }
                 } catch (e) {
                     log(e);
@@ -653,7 +705,6 @@ class Debug implements IDebug {
         }
     }
 }
-
 window.Debug = window.Debug || new Debug(true);
 
 export default window.Debug;

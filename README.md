@@ -1,4 +1,9 @@
 # Debug
+[![npm version](https://badge.fury.io/js/Debug.svg)](https://github.com/CrazySquirrel/Debug)
+[![license](https://img.shields.io/github/license/CrazySquirrel/Debug.svg)](https://github.com/CrazySquirrel/Debug)
+[![Github All Releases](https://img.shields.io/github/downloads/CrazySquirrel/Debug/total.svg)](https://github.com/CrazySquirrel/Debug)
+[![npm version](https://img.shields.io/badge/donate-%E2%99%A5-red.svg)](http://crazysquirrel.ru/support/)
+
 Class to extend the standard console.
 
 ## Build

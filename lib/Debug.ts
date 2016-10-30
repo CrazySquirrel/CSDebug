@@ -4,6 +4,9 @@
  */
 import IDebug from "../Interfaces/IDebug";
 import IError from "../Interfaces/IError";
+import IWindow from "../Interfaces/IWindow";
+
+declare var window: IWindow;
 /**
  * Declare error interface
  */
@@ -53,14 +56,14 @@ function log(e?: any) {
  * Push this into console methods
  */
 let that: IDebug;
-
-import Logger from "../vendors/Logger";
-
-import Utils from "../vendors/Utils";
+declare var module: any;
+declare var require: any;
+let Logger = require("CSLogger")({});
+let Utils = require("Utils");
 /**
  * Debug class
  */
-export default class Debug implements IDebug {
+class Debug implements IDebug {
 
     /**
      * Clone object safely
@@ -647,3 +650,8 @@ export default class Debug implements IDebug {
         }
     }
 }
+
+window.Debug = window.Debug || new Debug(true);
+
+export default window.Debug;
+module.exports = window.Debug;

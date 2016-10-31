@@ -36,7 +36,7 @@ let objBuildList = {};
 objBuildList = Object.assign(
     objBuildList,
     {
-        "./lib/Debug": ["./lib/Debug.ts"],
+        "./lib/CSDebug": ["./lib/CSDebug.ts"],
         "./dist/simple-typescript-example/index": ["./src/simple-typescript-example/index.ts"],
         "./dist/simple-javascript-example/index": ["./src/simple-typescript-example/index.ts"],
     }
@@ -116,12 +116,12 @@ module.exports = {
     entry: objBuildList,
     output: {
         filename: "[name].js",
-        library: "Debug",
+        library: "CSDebug",
         libraryTarget: "umd",
         umdNamedDefine: true
     },
     externals: {
-        "Debug": "Debug"
+        "CSDebug": "CSDebug"
     },
     devtool: (NODE_ENV == "development" ? "inline-source-map" : (NODE_ENV == "testing" ? "inline-source-map" : "")),
     plugins: arrPlugins,

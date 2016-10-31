@@ -2,7 +2,7 @@
 /**
  * Import sub interfaces
  */
-import IDebug from "./IDebug";
+import ICSDebug from "./ICSDebug";
 /**
  * The storage interface
  */
@@ -10,7 +10,7 @@ interface IWindow {
     document: any;
     console: any;
 
-    Debug: IDebug;
+    CSDebug: ICSDebug;
 }
 /**
  * Declare window interface

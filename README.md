@@ -1,7 +1,7 @@
-# Debug
-[![npm version](https://badge.fury.io/js/Debug.svg)](https://github.com/CrazySquirrel/Debug)
-[![license](https://img.shields.io/github/license/CrazySquirrel/Debug.svg)](https://github.com/CrazySquirrel/Debug)
-[![Github All Releases](https://img.shields.io/github/downloads/CrazySquirrel/Debug/total.svg)](https://github.com/CrazySquirrel/Debug)
+# CSDebug
+[![npm version](https://badge.fury.io/js/CSDebug.svg)](https://github.com/CrazySquirrel/CSDebug)
+[![license](https://img.shields.io/github/license/CrazySquirrel/CSDebug.svg)](https://github.com/CrazySquirrel/CSDebug)
+[![Github All Releases](https://img.shields.io/github/downloads/CrazySquirrel/CSDebug/total.svg)](https://github.com/CrazySquirrel/CSDebug)
 [![npm version](https://img.shields.io/badge/donate-%E2%99%A5-red.svg)](http://crazysquirrel.ru/support/)
 
 Class to extend the standard console.
@@ -18,15 +18,15 @@ or
 The build required NodeJs version 6 or higher.
 
 ```TypeScript
-import Debug from "Debug.ts";
+import CSDebug from "CSDebug.ts";
 
-new Debug(true);
+new CSDebug(true);
 ```
 
 or
 
 ```JavaScript
-let Debug = Debug("Debug.js");
+let CSDebug = Debug("CSDebug.js");
 
-new Debug(true);
+new CSDebug(true);
 ```

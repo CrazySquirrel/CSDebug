@@ -2,7 +2,7 @@
 /**
  * Import interface
  */
-import IDebug from "../Interfaces/IDebug";
+import ICSDebug from "../Interfaces/ICSDebug";
 import IError from "../Interfaces/IError";
 import IWindow from "../Interfaces/IWindow";
 
@@ -72,15 +72,15 @@ function log(e?: any) {
 /**
  * Push this into console methods
  */
-let that: IDebug;
+let that: ICSDebug;
 declare var module: any;
 declare var require: any;
-let Logger = require("CSLogger")({});
+let CSLogger = require("CSLogger")({});
 let Utils = require("Utils");
 /**
  * Debug class
  */
-class Debug implements IDebug {
+class CSDebug implements ICSDebug {
 
     /**
      * Clone object safely
@@ -94,7 +94,7 @@ class Debug implements IDebug {
             for (let i in obj) {
                 if (obj.hasOwnProperty(i)) {
                     if (typeof obj[i] === "object") {
-                        newObj[i] = Debug.cloneObjectSafely(obj[i], deep + 1);
+                        newObj[i] = CSDebug.cloneObjectSafely(obj[i], deep + 1);
                     } else {
                         newObj[i] = obj[i];
                     }
@@ -164,7 +164,7 @@ class Debug implements IDebug {
         if (
             typeof window !== "undefined" &&
             typeof window.document !== "undefined" &&
-            typeof window.document.body !== "undefined"
+            typeof window.document.body !== "object"
         ) {
             /**
              * Get debug console element
@@ -415,7 +415,7 @@ class Debug implements IDebug {
             strMessage
         ) {
             if (typeof strMessage === "object") {
-                strMessage = Debug.cloneObjectSafely(strMessage, 0);
+                strMessage = CSDebug.cloneObjectSafely(strMessage, 0);
             }
             /**
              * Create log object with mode, message and call stack parameters
@@ -481,7 +481,7 @@ class Debug implements IDebug {
             /**
              * If use Debug, then call error method, or call default error console method
              */
-            Logger.log(500, strMessage);
+            CSLogger.log(500, strMessage);
             if (that.use) {
                 /**
                  * Call Debug error method
@@ -530,7 +530,7 @@ class Debug implements IDebug {
             /**
              * If use Debug, then call error method, or call default warn console method
              */
-            Logger.log(400, strMessage);
+            CSLogger.log(400, strMessage);
             if (that.use) {
                 /**
                  * Call Debug warn method
@@ -579,7 +579,7 @@ class Debug implements IDebug {
             /**
              * If use Debug, then call error method, or call default info console method
              */
-            Logger.log(300, strMessage);
+            CSLogger.log(300, strMessage);
             if (that.use) {
                 /**
                  * Call Debug info method
@@ -628,7 +628,7 @@ class Debug implements IDebug {
             /**
              * If use Debug, then call error method, or call default log console method
              */
-            Logger.log(200, strMessage);
+            CSLogger.log(200, strMessage);
             if (that.use) {
                 /**
                  * Call Debug log method
@@ -675,7 +675,7 @@ class Debug implements IDebug {
             /**
              * If use Debug, then call error method, or call default debug console method
              */
-            Logger.log(100, strMessage);
+            CSLogger.log(100, strMessage);
             if (that.use) {
                 /**
                  * Call Debug debug method
@@ -713,7 +713,7 @@ class Debug implements IDebug {
         }
     }
 }
-root.Debug = root.Debug || new Debug(true);
+root.CSDebug = root.CSDebug || new CSDebug(true);
 
-export default root.Debug;
-module.exports = root.Debug;
+export default root.CSDebug;
+module.exports = root.CSDebug;

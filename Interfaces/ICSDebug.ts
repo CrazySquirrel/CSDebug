@@ -1,8 +1,8 @@
 "use strict";
 /**
- * The IDebug interface
+ * The ICSDebug interface
  */
-interface IDebug {
+interface ICSDebug {
     /**
      * The flag of use custom debug or not
      */
@@ -131,6 +131,6 @@ interface IDebug {
     _debug(strMessage: any, ...AdditionalMessage: Array<any>): void;
 }
 /**
- * Export the IDebug interface
+ * Export the ICSDebug interface
  */
-export default IDebug;
+export default ICSDebug;

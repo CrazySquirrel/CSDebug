@@ -5,7 +5,7 @@
     "inlineSourceMap": true
   },
   "files": [
-    "./lib/Debug.ts"
+    "./lib/CSDebug.ts"
   ],
   "exclude": [
     "node_modules",

@@ -1,7 +1,7 @@
 {
-  "name": "Debug",
+  "name": "CSDebug",
   "version": "1.0.8",
-  "main": "./lib/Debug.js",
+  "main": "./lib/CSDebug.js",
   "description": "Class to extend the standard console.",
   "keywords": [
     "TypeScript",
@@ -11,7 +11,7 @@
   "license": "ISC",
   "repository": {
     "type": "MIT",
-    "url": "git@github.com:CrazySquirrel/Debug.git"
+    "url": "git@github.com:CrazySquirrel/CSDebug.git"
   },
   "scripts": {
     "development": "NODE_ENV=development webpack --bail --config=webpack.config.js",
@@ -31,8 +31,8 @@
   },
   "dependencies": {
     "AnimationFrame": "^1.0.5",
-    "CSLogger": "^1.0.4",
-    "Utils": "^1.0.1",
+    "CSLogger": "^1.0.6",
+    "Utils": "^1.0.3",
     "crypto-js": "^3.1.8"
   },
   "devDependencies": {

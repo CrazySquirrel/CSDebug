@@ -151,7 +151,7 @@ class CSDebug implements ICSDebug {
                 root.console.debug = this._debug;
             }
         }
-        Utils.implementationStaticMethods(this);
+        Utils.implementationStaticMethods(this, "CSDebug");
     }
 
     /**

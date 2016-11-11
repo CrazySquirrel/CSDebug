@@ -2,5 +2,6 @@
 declare var require: any;
 require("./index.html");
 
-import CSDebug from "../../lib/CSDebug.ts";
+import CSDebugClass from "../../lib/CSDebug.ts";
+let CSDebug = new CSDebugClass(true);
 CSDebug.log("123");

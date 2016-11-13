@@ -6,12 +6,12 @@ import ICSDebug from "../Interfaces/ICSDebug";
 import IError from "../Interfaces/IError";
 import IWindow from "../Interfaces/IWindow";
 
-declare var window:IWindow;
-declare var global:any;
+declare var window: IWindow;
+declare var global: any;
 /**
  * Declare error interface
  */
-declare var Error:IError;
+declare var Error: IError;
 
 let root;
 
@@ -28,7 +28,7 @@ if (typeof window === "undefined") {
 /**
  * Default log function
  */
-function log(e?:any) {
+function log(e?: any) {
     return e || null;
 }
 /**
@@ -72,11 +72,13 @@ function log(e?:any) {
 /**
  * Push this into console methods
  */
-let that:ICSDebug;
-declare var module:any;
-declare var require:any;
-let CSLogger = require("CSLogger")({});
-let Utils = require("Utils");
+let that: ICSDebug;
+declare var module: any;
+declare var require: any;
+
+import CSLoggerClass from "CSLogger";
+let CSLogger = CSLoggerClass({});
+import Utils from "Utils";
 /**
  * Debug class
  */
@@ -88,7 +90,7 @@ class CSDebug implements ICSDebug {
      * @param deep
      * @return {{}}
      */
-    public static cloneObjectSafely(obj:Object, deep:number):Object {
+    public static cloneObjectSafely(obj: Object, deep: number): Object {
         let newObj = {};
         if (deep < 2) {
             for (let i in obj) {
@@ -107,16 +109,16 @@ class CSDebug implements ICSDebug {
     /**
      * Declare debug properties
      */
-    public use:boolean;
-    public arrLog:Array<any>;
-    public console:any;
-    public debugConsole:HTMLElement;
+    public use: boolean;
+    public arrLog: Array<any>;
+    public console: any;
+    public debugConsole: HTMLElement;
 
     /**
      * Debug constructor
      * @param localUse
      */
-    constructor(localUse:boolean) {
+    constructor(localUse: boolean) {
         that = this;
         /**
          * Debug console dom element
@@ -203,7 +205,7 @@ class CSDebug implements ICSDebug {
      * @param strMessage
      * @param AdditionalMessage
      */
-    public error(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public error(strMessage: any, ...AdditionalMessage: Array<any>) {
         /**
          * Write debug message in error mode
          */
@@ -223,7 +225,7 @@ class CSDebug implements ICSDebug {
      * @param strMessage
      * @param AdditionalMessage
      */
-    public warn(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public warn(strMessage: any, ...AdditionalMessage: Array<any>) {
         /**
          * Write debug message in warn mode
          */
@@ -243,7 +245,7 @@ class CSDebug implements ICSDebug {
      * @param strMessage
      * @param AdditionalMessage
      */
-    public info(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public info(strMessage: any, ...AdditionalMessage: Array<any>) {
         /**
          * Write debug message in info mode
          */
@@ -263,7 +265,7 @@ class CSDebug implements ICSDebug {
      * @param strMessage
      * @param AdditionalMessage
      */
-    public log(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public log(strMessage: any, ...AdditionalMessage: Array<any>) {
         /**
          * Write debug message in log mode
          */
@@ -283,7 +285,7 @@ class CSDebug implements ICSDebug {
      * @param strMessage
      * @param AdditionalMessage
      */
-    public debug(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public debug(strMessage: any, ...AdditionalMessage: Array<any>) {
         /**
          * Write debug message in debug mode
          */
@@ -306,7 +308,7 @@ class CSDebug implements ICSDebug {
      * @param strStackFile
      * @return {Array}
      */
-    public getLogRects(strMode?:string, strMessage?:string, strStackMethod?:string, strStackFile?:string) {
+    public getLogRects(strMode?: string, strMessage?: string, strStackMethod?: string, strStackFile?: string) {
         /**
          * Result log stack
          */
@@ -347,7 +349,7 @@ class CSDebug implements ICSDebug {
                     /**
                      * If method and file doesn't math to the filter, than skip it
                      */
-                    let isContinue:boolean = false;
+                    let isContinue: boolean = false;
                     for (let stack of log.stack) {
                         if (
                             (
@@ -409,7 +411,7 @@ class CSDebug implements ICSDebug {
      * @param mode
      * @param strMessage
      */
-    public write(mode:string, strMessage:any):void {
+    public write(mode: string, strMessage: any): void {
         if (
             mode &&
             strMessage
@@ -420,7 +422,7 @@ class CSDebug implements ICSDebug {
             /**
              * Create log object with mode, message and call stack parameters
              */
-            let obj:any = {};
+            let obj: any = {};
             obj.mode = mode;
             obj.message = strMessage;
             obj.stack = Utils.stack();
@@ -476,7 +478,7 @@ class CSDebug implements ICSDebug {
      * @param AdditionalMessage
      * @public
      */
-    public _error(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public _error(strMessage: any, ...AdditionalMessage: Array<any>) {
         if (that) {
             /**
              * If use Debug, then call error method, or call default error console method
@@ -525,7 +527,7 @@ class CSDebug implements ICSDebug {
      * @param AdditionalMessage
      * @public
      */
-    public _warn(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public _warn(strMessage: any, ...AdditionalMessage: Array<any>) {
         if (that) {
             /**
              * If use Debug, then call error method, or call default warn console method
@@ -574,7 +576,7 @@ class CSDebug implements ICSDebug {
      * @param AdditionalMessage
      * @public
      */
-    public _info(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public _info(strMessage: any, ...AdditionalMessage: Array<any>) {
         if (that) {
             /**
              * If use Debug, then call error method, or call default info console method
@@ -623,7 +625,7 @@ class CSDebug implements ICSDebug {
      * @param AdditionalMessage
      * @public
      */
-    public _log(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public _log(strMessage: any, ...AdditionalMessage: Array<any>) {
         if (that) {
             /**
              * If use Debug, then call error method, or call default log console method
@@ -670,7 +672,7 @@ class CSDebug implements ICSDebug {
      * @param AdditionalMessage
      * @public
      */
-    public _debug(strMessage:any, ...AdditionalMessage:Array<any>) {
+    public _debug(strMessage: any, ...AdditionalMessage: Array<any>) {
         if (that) {
             /**
              * If use Debug, then call error method, or call default debug console method

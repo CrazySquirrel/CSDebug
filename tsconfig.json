@@ -4,6 +4,17 @@
     "sourceMap": false,
     "inlineSourceMap": true
   },
+  "paths": {
+    "AnimationFrame": [
+      "./node_modules/AnimationFrame/lib/AnimationFrame.ts"
+    ],
+    "CSLogger": [
+      "./node_modules/CSLogger/lib/CSLogger.ts"
+    ],
+    "Utils": [
+      "./node_modules/Utils/lib/Utils.ts"
+    ]
+  },
   "files": [
     "./lib/CSDebug.ts"
   ],

@@ -313,72 +313,103 @@ class CSDebug implements ICSDebug {
          * Result log stack
          */
         let arrResultLog = [];
-        /**
-         * Loop all log records
-         */
-        for (let log of that.arrLog) {
-            /**
-             * If mode or message filter set and it is not matched, than skip that row
-             */
-            if (
+        if (
+            (
+                strMode === undefined ||
                 (
-                    (typeof strMode === "string" && strMode) &&
-                    log.mode !== strMode
-                ) ||
-                (
-                    (typeof strMessage === "string" && strMessage) &&
-                    typeof log.message === "string" &&
-                    log.message.indexOf(strMessage) === -1
+                    typeof strMode === "string" &&
+                    strMode.length > 0
                 )
-            ) {
-                continue;
-            }
+            ) &&
+            (
+                strMessage === undefined ||
+                (
+                    typeof strMessage === "string" &&
+                    strMessage.length > 0
+                )
+            ) &&
+            (
+                strStackMethod === undefined ||
+                (
+                    typeof strStackMethod === "string" &&
+                    strStackMethod.length > 0
+                )
+            ) &&
+            (
+                strStackFile === undefined ||
+                (
+                    typeof strStackFile === "string" &&
+                    strStackFile.length > 0
+                )
+            )
+        ) {
             /**
-             * If method or file filter added
+             * Loop all log records
              */
-            if (
-                (typeof strStackMethod === "string" && strStackMethod) ||
-                (typeof strStackFile === "string" && strStackFile)
-            ) {
+            for (let log of that.arrLog) {
                 /**
-                 * If rom has not stack, than skip it
+                 * If mode or message filter set and it is not matched, than skip that row
                  */
-                if (!log.stack) {
+                if (
+                    (
+                        (typeof strMode === "string" && strMode) &&
+                        log.mode !== strMode
+                    ) ||
+                    (
+                        (typeof strMessage === "string" && strMessage) &&
+                        typeof log.message === "string" &&
+                        log.message.indexOf(strMessage) === -1
+                    )
+                ) {
                     continue;
-                } else {
+                }
+                /**
+                 * If method or file filter added
+                 */
+                if (
+                    (typeof strStackMethod === "string" && strStackMethod) ||
+                    (typeof strStackFile === "string" && strStackFile)
+                ) {
                     /**
-                     * If method and file doesn't math to the filter, than skip it
+                     * If rom has not stack, than skip it
                      */
-                    let isContinue: boolean = false;
-                    for (let stack of log.stack) {
-                        if (
-                            (
-                                (typeof strStackMethod === "string" && strStackMethod) &&
-                                typeof stack.method === "string" &&
-                                stack.method.indexOf(strStackMethod) === -1
-                            ) ||
-                            (
-                                (typeof strStackFile === "string" && strStackFile) &&
-                                typeof stack.file === "string" &&
-                                stack.file.indexOf(strStackFile) === -1
-                            )
-                        ) {
-                            isContinue = true;
-                            break;
+                    if (!log.stack) {
+                        continue;
+                    } else {
+                        /**
+                         * If method and file doesn't math to the filter, than skip it
+                         */
+                        let isContinue: boolean = false;
+                        for (let stack of log.stack) {
+                            if (
+                                (
+                                    (typeof strStackMethod === "string" && strStackMethod) &&
+                                    typeof stack.method === "string" &&
+                                    stack.method.indexOf(strStackMethod) === -1
+                                ) ||
+                                (
+                                    (typeof strStackFile === "string" && strStackFile) &&
+                                    typeof stack.file === "string" &&
+                                    stack.file.indexOf(strStackFile) === -1
+                                )
+                            ) {
+                                isContinue = true;
+                                break;
+                            }
+                        }
+                        /**
+                         * Skip filter if row doesn't math
+                         */
+                        if (isContinue) {
+                            continue;
                         }
                     }
-                    /**
-                     * Skip filter if row doesn't math
-                     */
-                    if (isContinue) {
-                        continue;
-                    }
                 }
+                /**
+                 * If row match all filters, than added it into the result log stack
+                 */
+                arrResultLog.push(log);
             }
-            /**
-             * If row match all filters, than added it into the result log stack
-             */
-            arrResultLog.push(log);
         }
         /**
          * Return result log stack

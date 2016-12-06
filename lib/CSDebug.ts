@@ -316,31 +316,19 @@ class CSDebug implements ICSDebug {
         if (
             (
                 strMode === undefined ||
-                (
-                    typeof strMode === "string" &&
-                    strMode.length > 0
-                )
+                typeof strMode === "string"
             ) &&
             (
                 strMessage === undefined ||
-                (
-                    typeof strMessage === "string" &&
-                    strMessage.length > 0
-                )
+                typeof strMessage === "string"
             ) &&
             (
                 strStackMethod === undefined ||
-                (
-                    typeof strStackMethod === "string" &&
-                    strStackMethod.length > 0
-                )
+                typeof strStackMethod === "string"
             ) &&
             (
                 strStackFile === undefined ||
-                (
-                    typeof strStackFile === "string" &&
-                    strStackFile.length > 0
-                )
+                typeof strStackFile === "string"
             )
         ) {
             /**

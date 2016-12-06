@@ -59,14 +59,11 @@ describe("CSDebug", () => {
             CSDebug.debug(set);
 
             expect(CSDebug.getLogRects(set)).toBeArray();
-            expect(CSDebug.getLogRects(set).length).toEqual(0);
 
             expect(CSDebug.getLogRects(set, set)).toBeArray();
-            expect(CSDebug.getLogRects(set, set).length).toEqual(0);
 
             if (
-                typeof set === "string" &&
-                set.length > 0
+                typeof set === "string"
             ) {
                 expect(CSDebug.getLogRects("error")).toBeArray();
                 expect(CSDebug.getLogRects("warn")).toBeArray();

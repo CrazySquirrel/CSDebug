@@ -1,3 +1,7 @@
+## [1.0.22] - 2016-12-06
+### Changed
+- getLogRects method was changed
+
 ## [1.0.21] - 2016-12-06
 ### Changed
 - Typing declarations was added

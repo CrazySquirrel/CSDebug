@@ -1,6 +1,6 @@
 {
   "name": "CSDebug",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "main": "./lib/CSDebug.js",
   "description": "Class to extend the standard console.",
   "keywords": [

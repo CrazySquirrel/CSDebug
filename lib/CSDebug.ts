@@ -77,7 +77,9 @@ declare var module: any;
 declare var require: any;
 
 import CSLoggerClass from "CSLogger";
-let CSLogger = CSLoggerClass({});
+
+let CSLogger;
+
 import Utils from "Utils";
 /**
  * Debug class
@@ -117,8 +119,9 @@ class CSDebug implements ICSDebug {
     /**
      * Debug constructor
      * @param localUse
+     * @param settings
      */
-    constructor(localUse: boolean) {
+    constructor(localUse: boolean, settings: any = {}) {
         that = this;
         /**
          * Debug console dom element
@@ -153,6 +156,9 @@ class CSDebug implements ICSDebug {
                 root.console.debug = this._debug;
             }
         }
+
+        CSLogger = CSLoggerClass(settings.CSLogger || {});
+
         Utils.implementationStaticMethods(this, "CSDebug");
     }
 

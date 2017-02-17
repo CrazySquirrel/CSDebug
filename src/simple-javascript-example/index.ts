@@ -1,7 +1,7 @@
 "use strict";
-declare var require: any;
+declare let require: any;
 require("./index.html");
 
-let CSDebugClass = require("../../lib/CSDebug.js");
+let CSDebugClass = require("../../lib/CSDebug.ts");
 let CSDebug = new CSDebugClass(true);
 CSDebug.log("123");

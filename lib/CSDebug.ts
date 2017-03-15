@@ -80,7 +80,7 @@ import CSLoggerClass from "CSLogger";
 
 let CSLogger;
 
-import Utils from "Utils";
+import UtilsMain from "UtilsMain";
 /**
  * Debug class
  */
@@ -159,7 +159,7 @@ class CSDebug implements ICSDebug {
 
     CSLogger = CSLoggerClass(settings.CSLogger || {});
 
-    Utils.implementationStaticMethods(this, "CSDebug");
+    UtilsMain.implementationStaticMethods(this, "CSDebug");
   }
 
   /**
@@ -450,7 +450,7 @@ class CSDebug implements ICSDebug {
       let obj: any = {};
       obj.mode = mode;
       obj.message = strMessage;
-      obj.stack = Utils.stack();
+      obj.stack = UtilsMain.stack();
 
       /**
        * Add log object into the log stack

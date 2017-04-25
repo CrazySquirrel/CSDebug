@@ -103,6 +103,28 @@ arrPlugins.push(
     ])
 );
 
+let replacements = [
+  {
+    pattern: /#HASH#/gi,
+    replacement: () => {
+      return crypto.createHash("md5").update(
+          (new Date()).getTime().toString()).digest("hex");
+    }
+  },
+  {
+    pattern: /#PACKAGE_NAME#/gi,
+    replacement: () => {
+      return packagenpm.name;
+    }
+  },
+  {
+    pattern: /#PACKAGE_VERSION#/gi,
+    replacement: () => {
+      return packagenpm.version;
+    }
+  }
+];
+
 module.exports = {
   entry: objBuildList,
   output: {
@@ -123,8 +145,10 @@ module.exports = {
       "AnimationFrame": path.join(__dirname, "node_modules")
       + "/AnimationFrame/lib/AnimationFrame.ts",
       "Utils": path.join(__dirname, "node_modules") + "/Utils/lib/Utils.ts",
-      "UtilsMain": path.join(__dirname, "node_modules") + "/Utils/lib/UtilsMain.ts",
-      "UtilsUser": path.join(__dirname, "node_modules") + "/Utils/lib/UtilsUser.ts",
+      "UtilsMain": path.join(__dirname, "node_modules")
+      + "/Utils/lib/UtilsMain.ts",
+      "UtilsUser": path.join(__dirname, "node_modules")
+      + "/Utils/lib/UtilsUser.ts",
       "CSLogger": path.join(__dirname, "node_modules")
       + "/CSLogger/lib/CSLogger.ts"
     }
@@ -139,27 +163,7 @@ module.exports = {
         test: /\.ts(x?)$/,
         loaders: [
           StringReplacePlugin.replace({
-            replacements: [
-              {
-                pattern: /#HASH#/gi,
-                replacement: function (string, pattern1) {
-                  return crypto.createHash("md5").update(
-                      (new Date()).getTime().toString()).digest("hex");
-                }
-              },
-              {
-                pattern: /#PACKAGE_NAME#/gi,
-                replacement: function (string, pattern1) {
-                  return packagenpm.name;
-                }
-              },
-              {
-                pattern: /#PACKAGE_VERSION#/gi,
-                replacement: function (string, pattern1) {
-                  return packagenpm.version;
-                }
-              }
-            ]
+            replacements: replacements
           }),
           "babel-loader?presets[]=babel-preset-es2015-loose",
           "ts-loader"
@@ -168,6 +172,10 @@ module.exports = {
       {
         test: /\.html/i,
         loader: extractHTML.extract(["html"])
+      },
+      {
+        test: /\.json$/,
+        loader: "json-loader"
       }
     ]
   }

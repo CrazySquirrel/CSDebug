@@ -8,6 +8,8 @@
     ],
     "no-var-requires": false,
     "variable-name": false,
-    "no-unused-variable": false
+    "no-unused-variable": false,
+    "no-empty": false,
+    "no-console": false
   }
 }

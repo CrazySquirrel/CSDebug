@@ -1,14 +1,27 @@
 {
   "name": "CSDebug",
   "version": "1.0.26",
-  "main": "./lib/CSDebug.js",
   "description": "Class to extend the standard console.",
   "keywords": [
     "TypeScript",
     "Debugger"
   ],
-  "author": "Sergey Yastrebov <info@crazysquirrel.ru>",
+  "homepage": "https://github.com/CrazySquirrel/CSDebug",
+  "bugs": {
+    "url": "https://github.com/CrazySquirrel/CSDebug/issues",
+    "email": "info@crazysquirrel.ru"
+  },
   "license": "ISC",
+  "author": "Sergey Yastrebov <info@crazysquirrel.ru>",
+  "main": "./lib/CSDebug.js",
+  "module": "./lib/CSDebug.js",
+  "browser": "./lib/CSDebug.js",
+  "jsnext:main": "./lib/CSDebug.js",
+  "types": "./lib/CSDebug.d.ts",
+  "bin": {
+    "CSDebug": "./lib/CSDebug.js"
+  },
+  "man": "./README.md",
   "repository": {
     "type": "MIT",
     "url": "git@github.com:CrazySquirrel/CSDebug.git"
@@ -37,12 +50,15 @@
     }
   },
   "dependencies": {
-    "AnimationFrame": "^1.0.x",
-    "CSLogger": "^1.0.x",
-    "Utils": "^1.0.x",
+    "AnimationFrame": "^1.x.x",
+    "CSLogger": "^1.x.x",
+    "Utils": "^1.x.x",
     "raven-js": "^3.10.0"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.5.47",
+    "@types/jasmine-expect": "^3.6.1",
+    "@types/jasmine-matchers": "^0.2.30",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-istanbul": "^3.0.0",

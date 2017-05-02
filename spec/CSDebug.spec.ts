@@ -1,7 +1,5 @@
 "use strict";
 
-declare let beforeEach: any;
-declare let afterEach: any;
 declare let describe: any;
 declare let it: any;
 declare let expect: any;
@@ -37,7 +35,7 @@ describe("CSDebug", () => {
     "CSDebug.log",
     "CSDebug.debug",
   ].join("\n"), () => {
-    let paramsValues = [undefined, false, true, 0, 100, "", "test", {}, () => {
+    let paramsValues: any = [undefined, false, true, 0, 100, "", "test", {}, () => {
     }, window];
 
     CSDebug.initDebugConsole();

@@ -34,14 +34,14 @@ function log(e?: any) {
 /**
  * Console polyfill
  */
-((global) => {
+((_global) => {
   if (
-      typeof global !== "undefined"
+      typeof _global !== "undefined"
   ) {
-    if (!global.console) {
-      global.console = {};
+    if (!_global.console) {
+      _global.console = {};
     }
-    let con = global.console;
+    let con = _global.console;
     let prop;
     let method;
     let dummy = () => {
@@ -76,11 +76,11 @@ let that: ICSDebug;
 declare var module: any;
 declare var require: any;
 
-import CSLoggerClass from "CSLogger";
+import CSLoggerClass from "CSLogger/lib/CSLogger";
 
 let CSLogger;
 
-import UtilsMain from "UtilsMain";
+import UtilsMain from "Utils/lib/UtilsMain";
 /**
  * Debug class
  */
@@ -414,11 +414,6 @@ class CSDebug implements ICSDebug {
   /**
    * Get log record by ID
    * @param ID
-   * @return {{
-     *  mode: string,
-     *  message: string,
-     *  stack: Array<{method: string, file: string, line: string, column: string}>}
-     * }
    */
   public getLogRectByID(ID) {
     return that.arrLog[ID];

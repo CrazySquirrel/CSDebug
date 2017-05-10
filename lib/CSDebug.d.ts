@@ -12,12 +12,12 @@ declare class CSDebug implements ICSDebug {
      * @param deep
      * @return {{}}
      */
-    static cloneObjectSafely(obj: Object, deep: number): Object;
+    static cloneObjectSafely(obj: any, deep: number): any;
     /**
      * Declare debug properties
      */
     use: boolean;
-    arrLog: Array<any>;
+    arrLog: any[];
     console: any;
     debugConsole: HTMLElement;
     /**
@@ -35,31 +35,31 @@ declare class CSDebug implements ICSDebug {
      * @param strMessage
      * @param AdditionalMessage
      */
-    error(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    error(strMessage: any, ...AdditionalMessage: any[]): void;
     /**
      * Debug warn method
      * @param strMessage
      * @param AdditionalMessage
      */
-    warn(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    warn(strMessage: any, ...AdditionalMessage: any[]): void;
     /**
      * Debug info method
      * @param strMessage
      * @param AdditionalMessage
      */
-    info(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    info(strMessage: any, ...AdditionalMessage: any[]): void;
     /**
      * Debug log method
      * @param strMessage
      * @param AdditionalMessage
      */
-    log(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    log(strMessage: any, ...AdditionalMessage: any[]): void;
     /**
      * Debug debug method
      * @param strMessage
      * @param AdditionalMessage
      */
-    debug(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    debug(strMessage: any, ...AdditionalMessage: any[]): void;
     /**
      * Get records from log by filters
      * @param strMode
@@ -90,34 +90,34 @@ declare class CSDebug implements ICSDebug {
      * @param AdditionalMessage
      * @public
      */
-    _error(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    _error(strMessage: any, ...AdditionalMessage: any[]): void;
     /**
      * Implementation of the console window warn method
      * @param strMessage
      * @param AdditionalMessage
      * @public
      */
-    _warn(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    _warn(strMessage: any, ...AdditionalMessage: any[]): void;
     /**
      * Implementation of the console window info method
      * @param strMessage
      * @param AdditionalMessage
      * @public
      */
-    _info(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    _info(strMessage: any, ...AdditionalMessage: any[]): void;
     /**
      * Implementation of the console window log method
      * @param strMessage
      * @param AdditionalMessage
      * @public
      */
-    _log(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    _log(strMessage: any, ...AdditionalMessage: any[]): void;
     /**
      * Implementation of the console window debug method
      * @param strMessage
      * @param AdditionalMessage
      * @public
      */
-    _debug(strMessage: any, ...AdditionalMessage: Array<any>): void;
+    _debug(strMessage: any, ...AdditionalMessage: any[]): void;
 }
 export default CSDebug;

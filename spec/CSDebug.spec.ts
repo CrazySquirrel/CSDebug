@@ -7,7 +7,7 @@ declare let require: any;
 
 import CSDebugClass from "../lib/CSDebug";
 
-let CSDebug = new CSDebugClass(true);
+const CSDebug = new CSDebugClass(true);
 
 describe("CSDebug", () => {
 
@@ -35,12 +35,14 @@ describe("CSDebug", () => {
     "CSDebug.log",
     "CSDebug.debug",
   ].join("\n"), () => {
-    let paramsValues: any = [undefined, false, true, 0, 100, "", "test", {}, () => {
+    const paramsValues: any = [undefined, false, true, 0, 100, "", "test", {}, () => {
     }, window];
 
     CSDebug.initDebugConsole();
 
-    for (let set of paramsValues) {
+    for (let j = 0; j < paramsValues.length; j++) {
+      const set = paramsValues[j];
+
       CSDebug._error(set);
       CSDebug._warn(set);
       CSDebug._info(set);

@@ -41,14 +41,14 @@ function log(e?: any) {
     if (!_global.console) {
       _global.console = {};
     }
-    let con = _global.console;
+    const con = _global.console;
     let prop;
     let method;
-    let dummy = () => {
+    const dummy = () => {
       return null;
     };
-    let properties = ["memory"];
-    let methods = ("assert,clear,count,debug,dir,dirxml,error,exception,group," +
+    const properties = ["memory"];
+    const methods = ("assert,clear,count,debug,dir,dirxml,error,exception,group," +
     "groupCollapsed,groupEnd,info,log,markTimeline,profile,profiles,profileEnd," +
     "show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn").split(",");
     do {
@@ -92,10 +92,11 @@ class CSDebug implements ICSDebug {
    * @param deep
    * @return {{}}
    */
-  public static cloneObjectSafely(obj: Object, deep: number): Object {
-    let newObj = {};
+  public static cloneObjectSafely(obj: any, deep: number): any {
+    const newObj = {};
     if (deep < 2) {
-      for (let i in obj) {
+      for (let j = 0; j < obj.length; j++) {
+        const i = obj[j];
         if (obj.hasOwnProperty(i)) {
           if (typeof obj[i] === "object") {
             newObj[i] = CSDebug.cloneObjectSafely(obj[i], deep + 1);
@@ -112,7 +113,7 @@ class CSDebug implements ICSDebug {
    * Declare debug properties
    */
   public use: boolean;
-  public arrLog: Array<any>;
+  public arrLog: any[];
   public console: any;
   public debugConsole: HTMLElement;
 
@@ -211,7 +212,7 @@ class CSDebug implements ICSDebug {
    * @param strMessage
    * @param AdditionalMessage
    */
-  public error(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public error(strMessage: any, ...AdditionalMessage: any[]) {
     /**
      * Write debug message in error mode
      */
@@ -231,7 +232,7 @@ class CSDebug implements ICSDebug {
    * @param strMessage
    * @param AdditionalMessage
    */
-  public warn(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public warn(strMessage: any, ...AdditionalMessage: any[]) {
     /**
      * Write debug message in warn mode
      */
@@ -251,7 +252,7 @@ class CSDebug implements ICSDebug {
    * @param strMessage
    * @param AdditionalMessage
    */
-  public info(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public info(strMessage: any, ...AdditionalMessage: any[]) {
     /**
      * Write debug message in info mode
      */
@@ -271,7 +272,7 @@ class CSDebug implements ICSDebug {
    * @param strMessage
    * @param AdditionalMessage
    */
-  public log(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public log(strMessage: any, ...AdditionalMessage: any[]) {
     /**
      * Write debug message in log mode
      */
@@ -291,7 +292,7 @@ class CSDebug implements ICSDebug {
    * @param strMessage
    * @param AdditionalMessage
    */
-  public debug(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public debug(strMessage: any, ...AdditionalMessage: any[]) {
     /**
      * Write debug message in debug mode
      */
@@ -318,7 +319,7 @@ class CSDebug implements ICSDebug {
     /**
      * Result log stack
      */
-    let arrResultLog = [];
+    const arrResultLog = [];
     if (
         (
             strMode === undefined ||
@@ -340,7 +341,8 @@ class CSDebug implements ICSDebug {
       /**
        * Loop all log records
        */
-      for (let log of that.arrLog) {
+      for (let j = 0; j < that.arrLog.length; j++) {
+        const log = that.arrLog[j];
         /**
          * If mode or message filter set and it is not matched, than skip that row
          */
@@ -374,7 +376,9 @@ class CSDebug implements ICSDebug {
              * If method and file doesn't math to the filter, than skip it
              */
             let isContinue: boolean = false;
-            for (let stack of log.stack) {
+
+            for (let x = 0; x < log.stack.length; x++) {
+              const stack = log.stack[x];
               if (
                   (
                       (typeof strStackMethod === "string" && strStackMethod) &&
@@ -442,7 +446,7 @@ class CSDebug implements ICSDebug {
       /**
        * Create log object with mode, message and call stack parameters
        */
-      let obj: any = {};
+      const obj: any = {};
       obj.mode = mode;
       obj.message = strMessage;
       obj.stack = UtilsMain.stack();
@@ -498,7 +502,7 @@ class CSDebug implements ICSDebug {
    * @param AdditionalMessage
    * @public
    */
-  public _error(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public _error(strMessage: any, ...AdditionalMessage: any[]) {
     if (that) {
       /**
        * If use Debug, then call error method, or call default error console method
@@ -547,7 +551,7 @@ class CSDebug implements ICSDebug {
    * @param AdditionalMessage
    * @public
    */
-  public _warn(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public _warn(strMessage: any, ...AdditionalMessage: any[]) {
     if (that) {
       /**
        * If use Debug, then call error method, or call default warn console method
@@ -596,7 +600,7 @@ class CSDebug implements ICSDebug {
    * @param AdditionalMessage
    * @public
    */
-  public _info(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public _info(strMessage: any, ...AdditionalMessage: any[]) {
     if (that) {
       /**
        * If use Debug, then call error method, or call default info console method
@@ -645,7 +649,7 @@ class CSDebug implements ICSDebug {
    * @param AdditionalMessage
    * @public
    */
-  public _log(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public _log(strMessage: any, ...AdditionalMessage: any[]) {
     if (that) {
       /**
        * If use Debug, then call error method, or call default log console method
@@ -692,7 +696,7 @@ class CSDebug implements ICSDebug {
    * @param AdditionalMessage
    * @public
    */
-  public _debug(strMessage: any, ...AdditionalMessage: Array<any>) {
+  public _debug(strMessage: any, ...AdditionalMessage: any[]) {
     if (that) {
       /**
        * If use Debug, then call error method, or call default debug console method

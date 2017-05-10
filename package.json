@@ -1,6 +1,6 @@
 {
   "name": "CSDebug",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "Class to extend the standard console.",
   "keywords": [
     "TypeScript",
